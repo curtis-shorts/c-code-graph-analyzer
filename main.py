@@ -7,13 +7,7 @@ from helperFunctions.joinCAndHFiles import joinCAndHFiles
 import argparse
 from contextlib import redirect_stdout
 
-# Errors in outputs:
-#       UCX won't create more than 1 cluster
-#       Need to handle when there's an edge weight of 0 (flag to dump the values?) 
-#           **************************** This is especially important for the macros/functions only runs ****************************
-#       Generalization to any source code needs to consider if the
-#                       root dir for inlcludes is different from source_dir
-# Goals for the paper:
+# Goals for this work:
 #       Implement a weighted graph clustering algorithm (e.g. networkx's louvain_partitions)
 #       Get a good overview of UCS/UCT/UCP, analyse what clustering method is best
 #       See if it's possible to cluster each of UCS/UCT/UTP all at once
@@ -79,13 +73,6 @@ if __name__ == "__main__":
     else:
         with open(pickle_path, "rb") as f:
             files_dict = pickle.load(f)
-
-    #print("Macros:", len([m for d in files_dict.values() for f in d.values() for m in f.macro_definitions]))
-    #print("Other:", len([m for d in files_dict.values() for f in d.values() for m in f.other_definitions]))
-    #print("Un-joint:", len([f for d in files_dict.values() for f in d]))
-    #print("Macros:", len([m for f in files_dict['ucp'].values() for m in f.macro_definitions]))
-    #print("Other:", len([m for f in files_dict['ucp'].values() for m in f.other_definitions]))
-    #exit()
     
     # Combine the .c and .h files for better utility
     if args.macros_only:
@@ -94,14 +81,11 @@ if __name__ == "__main__":
         reconstrainFileReferences(args.directories, files_dict, 'functions')
     elif 1: #args.joint_files:
         files_dict = joinCAndHFiles(files_dict, args.source_dir)
-
-    #print("Joint:", len([f for d in files_dict.values() for f in d]))
-    #exit()
     
     # Get metadata for the whole codebase
     csv_file = f'{output_dir}/test_file_full.csv'
     files_list = [file for run_dir in files_dict.keys() for file in files_dict[run_dir].values()]
-    """with open(csv_file, 'w') as f:
+    with open(csv_file, 'w') as f:
         with redirect_stdout(f):
             total_files = len(files_list)
             lines_of_code = sum([f.lines_in_file for f in files_list])
@@ -129,7 +113,7 @@ if __name__ == "__main__":
                 print(f"{dir} all,{total_files},{lines_of_code}")
                 print(f"{dir} c_only,{c_files},{c_loc}")
                 print(f"{dir} h_only,{h_files},{h_loc}")
-                print(f"{dir} inl_only,{inl_files},{inl_loc}")"""
+                print(f"{dir} inl_only,{inl_files},{inl_loc}")
 
     ############### MAIN WORKFLOW ###############
     executeClusterWorkflow(files_dict, algorithm, args.source_dir, output_dir, k_values,

@@ -212,10 +212,6 @@ def executeClusterWorkflow(files_dict, algorithm, source_dir, output_dir, k_valu
             "cluster_nodes": cluster_nodes
         }
 
-        #print(clusters_dict)
-        #print([c['mq_value'] for c in clusters_dict.values()])
-        #exit()
-
         return iterative_removal
 
     # Aggregate MQ values and metrics
@@ -230,12 +226,6 @@ def executeClusterWorkflow(files_dict, algorithm, source_dir, output_dir, k_valu
     
     clusters_dict = {}
     clusterRecursionHelper(files_list, '', 0, 3, clusters_dict, graph_dir, k_values[0], k_values[0])
-    #print([d for c in clusters_dict for d in c.values()])
-    mq_list = [c['mq_value'] for c in clusters_dict.values()]
-    one_mq_list = [c['mq_value'] for c in clusters_dict.values() if c['mq_value'] != 1]
-    print(len(mq_list), len(mq_list) - len(one_mq_list), sum(one_mq_list)/len(one_mq_list))
-    #exit()
-
 
     # Recursively execute at each depth
     #for depth in range(max_plot_depth):
