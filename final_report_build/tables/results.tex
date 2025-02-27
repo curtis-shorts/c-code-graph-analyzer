@@ -1,0 +1,30 @@
+\begin{table*}[ht]
+    \centering
+    \caption{Results of running the clustering algorithms on each of the code-bases.}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+             \multirow{2}{*}{Library} & \multirow{2}{*}{Sub-Partitions} & One-Valued & \multicolumn{2}{c|}{Mean MQ} & \multicolumn{2}{c|}{Mean WMQ} \\
+        \cline{4-7}
+            & & Sub-Partitions & Gradient & Genetic & Gradient & Genetic \\
+        \hline
+        \hline
+            UCX & 87 & 58 & 0.4425 & 0.4471 & 0.4430 & 0.4479 \\
+        \hline
+            OFI & 204 & 164 & 0.3738 & 0.3751 & 0.3686 & 0.3708 \\
+        \hline
+            Portals & 47 & 40 & 0.4471 & 0.4031 & 0.4046 & 0.4390 \\
+        \hline
+            %SOS & 2 & 0 & 0.4256 & 0.4396 & 0.4401 & 0.4236 \\
+        %\hline
+        %    OpenMPI & & & & & & \\
+        %\hline
+        %\hline
+        %    UCT & & & & & \\
+        %\hline
+        %    UCP & & & & & \\
+        %\hline
+        %    UCS & & & & & \\
+        %\hline
+    \end{tabular}
+    \label{tab:mq_results}
+\end{table*}

@@ -1,0 +1,47 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Modularization Quality}
+\label{subsec:mq_description}
+
+Each cluster in a partition has intra-dependencies between the nodes it contains and inter-dependencies with other clusters in the partition. Equation \ref{eqn:intraconnectivity} defines the intra-dependency of cluster i where $\mu$ is the number of intra-dependencies in the cluster and N is the number of nodes in the cluster. Equation \ref{eqn:interconnectivity} similarly defines the inter-dependency between cluster i and cluster j where $\epsilon$ is the number of inter-dependencies between the clusters. Both of these metrics are bounded in the domain of [0,1] where $A_i = 0$ is no relation between files in a cluster, $A_i = 1$ means the cluster is fully connected, $E_{i,j} = 0$ is no dependencies between the clusters, and $E_{i,j} = 1$ means the clusters are fully connected. 
+
+\begin{equation}
+    A_i = \dfrac{\mu_i}{N_i^2} \\
+    \label{eqn:intraconnectivity}
+\end{equation}
+
+\begin{equation}
+    E_{ij} =
+    \begin{cases}
+        0 & i = j \\
+        \dfrac{\epsilon_{ij}}{2N_iN_j} & i \ne j \\
+    \end{cases}
+    \label{eqn:interconnectivity}
+\end{equation}
+
+With the goal in mind of attempting to discern the architectural construction of the code-base, the objective is to find the partition which minimizes the inter-dependencies and maximizes the intra-dependencies as these characteristics lead to the most modular grouping of nodes. The modularization quality (MQ) of a partition is a heuristic defined by the inter- and intra-dependencies of the clusters. The bounds of the MQ are [-1, 1] with -1 indicating no cohesion within the clusters and 1 indicating no coupling between the clusters.
+
+\begin{equation}
+    MQ =
+    \begin{cases}
+        \dfrac{1}{k} \sum_{i=1}^{k} A_i - \dfrac{1}{\dfrac{k(k-1)}{2}} \sum_{i,j=1}^{k} E_{i,j} & k > 1 \\
+        \dfrac{\epsilon_{ij}}{2N_iN_j} & k = 1 \\
+    \end{cases}
+    \label{eqn:mq_heuristic}
+\end{equation}
+
+The one drawback of the MQ heuristic is that it assumes an unweighted graph. In order to account for this, a simple multiplication factor was added to the inter- and intra-connectivity factors. These modified factors are represented by Equations \ref{eqn:weighted_intra} and \ref{eqn:weighted_inter} respectively where w\_i is the weight of the inbound edges for node i, W is the total weight of all edges in a cluster, and $m_{ij}$ is the weight between two nodes, i and j. The weighted MQ heuristic (WMQ) is identical to Equation \ref{eqn:mq_heuristic} but with WA and WE in place of A and E respectively.
+
+\begin{equation}
+    WA_i = \dfrac{w_i\mu_i}{WN_i^2} \\
+    \label{eqn:weighted_intra}
+\end{equation}
+
+\begin{equation}
+    WE_{ij} =
+    \begin{cases}
+        0 & i = j \\
+        \dfrac{m_{ij}}{2N_iN_j} & i \ne j \\
+    \end{cases}
+    \label{eqn:weighted_inter}
+\end{equation}
+

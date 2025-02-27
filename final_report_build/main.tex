@@ -1,0 +1,104 @@
+\documentclass[conference,10pt]{IEEEtran}
+
+% *** CITATION PACKAGES ***
+\usepackage{cite}
+%\usepackage[subtle]{savetrees}
+
+% *** GRAPHICS RELATED PACKAGES ***
+\ifCLASSINFOpdf
+   \usepackage[pdftex]{graphicx}
+   \graphicspath{{../pdf/}{../jpeg/}{./figures/}{./plots}}
+   \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+   \usepackage[dvips]{graphicx}
+   \graphicspath{{./figures/}{./plots}}
+   \DeclareGraphicsExtensions{.eps}
+\fi
+
+%\usepackage{hyperref}
+\usepackage[cmex10]{amsmath}
+\usepackage[caption=false,font=footnotesize]{subfig}
+\usepackage{url}
+\usepackage{fixltx2e}
+\usepackage{colortbl}
+\usepackage{color}
+\usepackage{xspace}
+%\usepackage{randtext}
+%\usepackage{subfigure}
+\usepackage{tablefootnote}
+%\usepackage{comment}
+\usepackage{alltt}
+\usepackage{multirow}
+\usepackage[nolist]{acronym}
+%\usepackage{subfigure}
+\usepackage{caption}
+%\usepackage{booktabs}
+%\usepackage{tabularx,ragged2e,booktabs,caption}
+%\usepackage{microtype}
+\usepackage{hyphenat}
+\usepackage[T1]{fontenc}
+\usepackage{xcolor, soul}
+\usepackage{listings}
+\lstset{
+basicstyle=\small\ttfamily,
+columns=flexible,
+breaklines=true
+}
+\usepackage{comment}
+%Savetrees magic, ask Ryan about this before uncommenting, it buys you more space for text/figures but can be tricky to use and get your paper rejected if you don't use it properly
+\usepackage[all=normal,paragraphs=tight,wordspacing=tight,charwidths=tight,indent=tight,floats=tight,leading=tight,lists=tight,bibnotes=normal]{savetrees}
+
+\setlength{\parskip}{1.7pt}
+\setlength\belowcaptionskip{10pt}
+\newcommand{\cus}[1]{\textcolor{blue}{[cushorts: #1]}}
+\newcommand{\ttz}[1]{\textcolor{purple}{[ttaraz: #1]}}
+\newcommand{\reg}[1]{\textcolor{purple}{[reg: #1]}}
+%use commands like doubleblind to hide text that might reveal your identity for double blind reviews (not as common as single blind), later when you have the final version you can upcate the command and bring back the text
+\newcommand{\doubleblind}[1]{{#1}}
+
+\newcommand{\refpend}[0]{\textcolor{red}{[Reference Needed]}}
+
+%%%%%%%%%%%%%%%%%%%%% Start of Report %%%%%%%%%%%%%%%%%%%%%
+
+\title{ELEC 876 Final Report - Graphical\\Analyses of HPC Middleware Libraries}
+\author{
+\IEEEauthorblockN{Curtis Shorts\\}
+\IEEEauthorblockA{Electrical and Computer Engineering Department, Queen's University\\
+11 Union Street, Kingston, Ontario, Canada\\
+Email: {curtis.shorts@queensu.ca}}
+%\vspace{-10pt}
+
+%You need to include this if we're working with folks from Sanida in the US, otherwise don't uncomment this!
+%\thanks{*Sandia National Laboratories is a multimission laboratory managed and operated by National Technology and Engineering Solutions of Sandia LLC, a wholly owned subsidiary of Honeywell International Inc. for the U.S. Department of Energy’s National Nuclear Security Administration under contract DE-NA0003525.}\\
+}
+
+% For how much blank space to remove after figures
+%\newcommand\figrmspace{-15pt}
+
+\IEEEoverridecommandlockouts
+
+\begin{document}
+%\input{cover_letter}
+
+\maketitle
+
+\input{paper_body/1_abstract}
+
+\input{paper_body/2_introduction}
+
+\input{paper_body/3_related_work}
+
+\input{paper_body/4_methodology}
+
+\input{paper_body/5_results}
+
+\input{paper_body/6_validity}
+
+\input{paper_body/7_conclusions}
+
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
+
+\end{document}
+
+%SUMMARY
