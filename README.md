@@ -1,0 +1,2 @@
+# C-Source Code Analysis Tool
+This project was done for the course "ELEC 876 - Software Re-Engineering" at Queen's University. It takes in C source code and outputs metadata about the code case (LoC, file counts, file composition, etc.) and clustered module dependency graphs which can be analyzed to uncover dependencies in the code-base. A full report is included which outlines the methodology used, analysis of HPC code-bases including UCX and Open MPI, and a discussion of the benefits and limitation of the tool.
